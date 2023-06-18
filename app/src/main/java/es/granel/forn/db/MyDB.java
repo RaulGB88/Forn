@@ -10,14 +10,14 @@ public class MyDB extends SQLiteOpenHelper {
 
     private static SQLiteDatabase db;
     //nombre de la base de datos
-    private static final String database = "MiBanco";
+    private static final String database = "Forn";
     //versión de la base de datos
-    private static final int version = 15;
+    private static final int version = 21;
     //Instrucción SQL para crear la tabla de Clients
     private String sqlCreacionClients = "CREATE TABLE Clients ( id INTEGER PRIMARY KEY AUTOINCREMENT, nif STRING, nombre STRING, " +
             "apellidos STRING, claveSeguridad STRING, email STRING);";
     //Instruccion SQL para crear la tabla de Products
-    private String sqlCreacionProducts = "CREATE TABLE Products ( id INTEGER PRIMARY KEY AUTOINCREMENT, nombre STRING, precio FLOAT, " +
+    private String sqlCreacionProducts = "CREATE TABLE Products ( id INTEGER PRIMARY KEY AUTOINCREMENT, image STRING, nombre STRING, precio FLOAT, " +
             "stock INTEGER);";
     //Instruccion SQL para crear la tabla de Movements
     private String sqlCreacionMovements = "CREATE TABLE Movements ( id INTEGER PRIMARY KEY AUTOINCREMENT, tipo INTEGER, fechaoperacion LONG," +
@@ -116,11 +116,11 @@ public class MyDB extends SQLiteOpenHelper {
         db.execSQL("INSERT INTO Clients (rowid, id, nif, nombre, apellidos, claveSeguridad, email) VALUES (null, null, 'B8888888H', 'Ayuntamiento de Valencia', '-', '1234', '-');");
 
         // Insertamos las Products
-        db.execSQL("INSERT INTO Products (rowid, id, nombre, precio, stock) VALUES (null, null, 'pan de pueblo', 0.9, 20);");
-        db.execSQL("INSERT INTO Products (rowid, id, nombre, precio, stock) VALUES (null, null, 'pan clasico', 0.8, 40);");
-        db.execSQL("INSERT INTO Products (rowid, id, nombre, precio, stock) VALUES (null, null, 'pan integral', 0.85, 12);");
-        db.execSQL("INSERT INTO Products (rowid, id, nombre, precio, stock) VALUES (null, null, 'croisant', 1.2, 15);");
-        db.execSQL("INSERT INTO Products (rowid, id, nombre, precio, stock) VALUES (null, null, 'magdalena', 1.1, 18);");
+        db.execSQL("INSERT INTO Products (rowid, id, image, nombre, precio, stock) VALUES (null, null, 'R.drawable.pan', 'pan de pueblo', 0.9, 20);");
+        db.execSQL("INSERT INTO Products (rowid, id, image, nombre, precio, stock) VALUES (null, null, 'R.drawable.pan', 'pan clasico', 0.8, 40);");
+        db.execSQL("INSERT INTO Products (rowid, id, image, nombre, precio, stock) VALUES (null, null, 'R.drawable.pan', 'pan integral', 0.85, 12);");
+        db.execSQL("INSERT INTO Products (rowid, id, image, nombre, precio, stock) VALUES (null, null, 'R.drawable.pan', 'croisant', 1.2, 15);");
+        db.execSQL("INSERT INTO Products (rowid, id, image, nombre, precio, stock) VALUES (null, null, 'R.drawable.pan', 'magdalena', 1.1, 18);");
 
         // Insertamos los Movements
         //db.execSQL("INSERT INTO Movements (rowid, id, tipo, fechaoperacion, descripcion, importe, idProductrigen, idProductdestino) VALUES (null, null, 0, 1420153380000, 'Recibo Iberdrola Diciembre 2014', -73.87, 1, 5);");

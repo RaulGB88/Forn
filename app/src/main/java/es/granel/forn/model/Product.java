@@ -6,6 +6,7 @@ import java.util.List;
 public class Product implements Serializable {
 
     private int id;
+    private String image;
     private String name;
     private float price;
     private int stock;
@@ -30,6 +31,13 @@ public class Product implements Serializable {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getImage() {
+        return image;
+    }
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public String getName() {
