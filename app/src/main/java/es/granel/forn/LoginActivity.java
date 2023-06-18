@@ -1,0 +1,76 @@
+package es.granel.forn;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.TextView;
+
+import java.util.List;
+
+import es.granel.forn.dao.ClientDAO;
+import es.granel.forn.model.Client;
+
+public class LoginActivity extends AppCompatActivity {
+
+
+    ClientDAO clientDAO = new ClientDAO();
+
+    List<Client> listClient;
+
+    TextView txtDNI;
+    TextView txtPass;
+
+    Intent pageReturned;
+
+    @SuppressLint("ResourceAsColor")
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_login);
+
+        txtDNI = (TextView) findViewById(R.id.etDNI);
+        String dni = (String) txtDNI.getText().toString();
+
+        txtPass = (TextView) findViewById(R.id.etPass);
+        String pass = (String) txtPass.getText().toString();
+
+        Client clientEntry = new Client();
+        clientEntry.setNif(dni);
+        clientEntry.setPassword(pass);
+
+        Intent pageReturned = new Intent(LoginActivity.this, MainActivity.class);
+
+        Client clientReturned = checkClient(clientEntry);
+
+        if(clientReturned == null) {
+            TextView txtLoginWrong = (TextView) findViewById(R.id.loginIncorrecto);
+            txtLoginWrong.setText(R.string.loginError);
+            txtLoginWrong.setTextColor(R.color.red);
+        }
+
+    }
+
+    public Client checkClient(Client client) {
+
+        Client clientReturned = null;
+
+        // Check Client.
+        for(Client c : listClient)  {
+            if (client.getNif().equalsIgnoreCase(c.getNif()) && client.getPassword().equalsIgnoreCase(c.getPassword())) {
+                pageReturned = new Intent(LoginActivity.this, MainActivity.class);
+                clientReturned = (Client) clientDAO.search(client);
+
+                // Pasamos el usuario logeqado al siguiente Activity (LogedActivity)
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                intent.putExtra("user", c);
+                startActivity(intent);
+            }
+        }
+
+        return clientReturned;
+    }
+
+}
