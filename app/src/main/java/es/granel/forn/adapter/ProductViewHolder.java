@@ -35,7 +35,7 @@ public class ProductViewHolder extends RecyclerView.ViewHolder {
     public void render(Product product) {
 
         // 6. Set the object atributtes to TextView (Set toi TextView).
-        //iv1.setImageResource(Integer.parseInt(product.getImage()));
+        iv1.setImageResource(product.getImage());
         tv1.setText(String.valueOf(product.getId()));
         tv2.setText(String.valueOf(product.getName()));
         tv3.setText(String.valueOf(product.getStock()));
