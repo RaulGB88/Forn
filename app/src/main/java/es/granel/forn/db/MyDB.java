@@ -15,7 +15,7 @@ public class MyDB extends SQLiteOpenHelper {
     //nombre de la base de datos
     private static final String database = "Forn";
     //versión de la base de datos
-    private static final int version = 21;
+    private static final int version = 22;
     //Instrucción SQL para crear la tabla de Clients
     private String sqlCreacionClients = "CREATE TABLE Clients ( id INTEGER PRIMARY KEY AUTOINCREMENT, nif STRING, nombre STRING, " +
             "apellidos STRING, claveSeguridad STRING, email STRING);";
