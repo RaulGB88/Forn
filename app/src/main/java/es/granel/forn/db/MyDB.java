@@ -5,6 +5,9 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import es.granel.forn.R;
+import es.granel.forn.utility.ImageBlob;
+
 public class MyDB extends SQLiteOpenHelper {
 
 
@@ -12,12 +15,12 @@ public class MyDB extends SQLiteOpenHelper {
     //nombre de la base de datos
     private static final String database = "Forn";
     //versión de la base de datos
-    private static final int version = 21;
+    private static final int version = 22;
     //Instrucción SQL para crear la tabla de Clients
     private String sqlCreacionClients = "CREATE TABLE Clients ( id INTEGER PRIMARY KEY AUTOINCREMENT, nif STRING, nombre STRING, " +
             "apellidos STRING, claveSeguridad STRING, email STRING);";
     //Instruccion SQL para crear la tabla de Products
-    private String sqlCreacionProducts = "CREATE TABLE Products ( id INTEGER PRIMARY KEY AUTOINCREMENT, image STRING, nombre STRING, precio FLOAT, " +
+    private String sqlCreacionProducts = "CREATE TABLE Products ( id INTEGER PRIMARY KEY AUTOINCREMENT, image BLOB, nombre STRING, precio FLOAT, " +
             "stock INTEGER);";
     //Instruccion SQL para crear la tabla de Movements
     private String sqlCreacionMovements = "CREATE TABLE Movements ( id INTEGER PRIMARY KEY AUTOINCREMENT, tipo INTEGER, fechaoperacion LONG," +
@@ -76,6 +79,8 @@ public class MyDB extends SQLiteOpenHelper {
         db.execSQL(sqlCreacionClients);
         db.execSQL(sqlCreacionProducts);
         db.execSQL(sqlCreacionMovements);
+
+        //ImageBlob.readFile(R.drawable.cake);
 
         insercionDatos(db);
         Log.i("SQLite", "Se crea la base de datos " + database + " version " + version);

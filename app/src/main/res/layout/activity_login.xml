@@ -78,6 +78,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
         android:background="@color/design_default_color_primary"
+        android:onClick="checkLogin"
         android:text="@string/entry"
         app:backgroundTint="@null"
         app:layout_constraintEnd_toEndOf="parent"

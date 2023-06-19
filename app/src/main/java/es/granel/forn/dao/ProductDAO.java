@@ -4,9 +4,12 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.text.TextUtils;
 
+import es.granel.forn.R;
+import es.granel.forn.db.ImageDB;
 import es.granel.forn.db.MyDB;
 import es.granel.forn.model.Client;
 import es.granel.forn.model.Product;
+import es.granel.forn.utility.Constants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -97,6 +100,7 @@ public class ProductDAO implements IPojoDAO {
                 c.setName(cursor.getString(1));
                 c.setPrice(cursor.getFloat(2));
                 c.setStock(cursor.getInt(3));
+                c.setImage(checkImage(c).getImage());
 
                 // Obtenemos el Client y lo asignamos
                 /*
@@ -130,6 +134,7 @@ public class ProductDAO implements IPojoDAO {
                 c.setName(cursor.getString(1));
                 c.setPrice(cursor.getFloat(2));
                 c.setStock(cursor.getInt(3));
+                c.setImage(checkImage(c).getImage());
 
                 c.setClient(Client);
 
@@ -141,6 +146,39 @@ public class ProductDAO implements IPojoDAO {
             } while (cursor.moveToNext());
         }
         return listaProducts;
+    }
+
+    public Product checkImage(Product itemEntry) {
+        List<Integer> listDB = ImageDB.initImages();
+        Product itemExit = new Product();
+        for(int i : listDB) {
+            if(i == R.drawable.cake && itemEntry.getName().equalsIgnoreCase(Constants.CAKE)) {
+                itemExit.setImage(i);
+            }
+            if(i == R.drawable.croissant && itemEntry.getName().equalsIgnoreCase(Constants.CROISSANT)) {
+                itemExit.setImage(i);
+            }
+            if(i == R.drawable.pan && itemEntry.getName().equalsIgnoreCase(Constants.PAN)) {
+                itemExit.setImage(i);
+            }
+            if(i == R.drawable.muffin && itemEntry.getName().equalsIgnoreCase(Constants.MUFFIN)) {
+                itemExit.setImage(i);
+            }
+            if(i == R.drawable.pepito_pan && itemEntry.getName().equalsIgnoreCase(Constants.PEPITO)) {
+                itemExit.setImage(i);
+            }
+            if(i == R.drawable.pepito_pan && itemEntry.getName().equalsIgnoreCase(Constants.PAN_PUEBLO)) {
+                itemExit.setImage(i);
+            }
+            if(i == R.drawable.pepito_pan && itemEntry.getName().equalsIgnoreCase(Constants.PAN_CLASICO)) {
+                itemExit.setImage(i);
+            }
+            if(i == R.drawable.pepito_pan && itemEntry.getName().equalsIgnoreCase(Constants.PAN_INTEGRAL)) {
+                itemExit.setImage(i);
+            }
+
+        }
+        return itemExit;
     }
 
 }

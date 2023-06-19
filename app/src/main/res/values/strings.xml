@@ -9,4 +9,8 @@
     <string name="inicioSesion">Iniciar Sesión</string>
     <string name="user">Usuario</string>
     <string name="loginError">Usuario o contraseña incorrectos</string>
+    <string name="description">Descripción:</string>
+    <string name="price">Precio:</string>
+    <string name="stock">Stock:</string>
+    <string name="buy">Comprar</string>
 </resources>
