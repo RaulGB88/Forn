@@ -2,9 +2,14 @@ package es.granel.forn;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
+import android.content.ContentValues;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import es.granel.forn.model.Product;
 
@@ -15,7 +20,9 @@ public class ProductDetailActivity extends AppCompatActivity {
     TextView tv2;
     TextView tv3;
     TextView tv4;
+    private Button btnBuy;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,6 +32,24 @@ public class ProductDetailActivity extends AppCompatActivity {
         if(product != null) {
             render(product);
         }
+
+        btnBuy = (Button) findViewById(R.id.btnBuy);
+
+        btnBuy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                buy();
+            }
+        });
+    }
+
+    private void buy() {
+        Toast.makeText(this, String.valueOf("Bougth product."), Toast.LENGTH_SHORT).show();
+
+        ContentValues reg = new ContentValues();
+
+
     }
 
     public void render(Product item) {
