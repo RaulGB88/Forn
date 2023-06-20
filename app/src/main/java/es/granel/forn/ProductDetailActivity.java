@@ -31,6 +31,8 @@ public class ProductDetailActivity extends AppCompatActivity {
 
     TextView txtUser;
 
+    float pagar = 0;
+
     ProductDAO productDAO = new ProductDAO();
 
     @SuppressLint("MissingInflatedId")
@@ -75,7 +77,6 @@ public class ProductDetailActivity extends AppCompatActivity {
     }
 
     private void buy(Client user, Product item) {
-        Toast.makeText(this, String.valueOf("Producto comprado...: " + item.getName() + " - " + item.getPrice()), Toast.LENGTH_SHORT).show();
 
         et5 = (TextView) findViewById(R.id.etNumber);
 
@@ -89,7 +90,12 @@ public class ProductDetailActivity extends AppCompatActivity {
         }
 
         item.setStock(item.getStock()-number);
+        // item.setPrice(item.getPrice() * number);
         productDAO.update(item);
+
+        pagar = number * item.getPrice();
+
+        Toast.makeText(this, String.valueOf("Total a pagar...: " + pagar), Toast.LENGTH_SHORT).show();
 
         Intent intent = new Intent(ProductDetailActivity.this, ProductDetailActivity.class);
         intent.putExtra("item", item);
