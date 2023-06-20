@@ -43,11 +43,11 @@
         app:layout_constraintStart_toEndOf="@id/tvDescriptionDesc" />
 
     <TextView
-        android:id="@+id/tvPriceDesc"
+        android:id="@+id/tvStockDesc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:text="@string/price"
+        android:text="@string/stock"
         android:textColor="@color/design_default_color_error"
         app:layout_constraintTop_toBottomOf="@+id/tvDescription"
         app:layout_constraintStart_toEndOf="@id/ivImage" />
@@ -62,11 +62,11 @@
         app:layout_constraintStart_toEndOf="@id/tvPriceDesc" />
 
     <TextView
-        android:id="@+id/tvStockDesc"
+        android:id="@+id/tvPriceDesc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:text="@string/stock"
+        android:text="@string/price"
         android:textColor="@color/design_default_color_error"
         app:layout_constraintTop_toBottomOf="@+id/tvPrice"
         app:layout_constraintStart_toEndOf="@id/ivImage" />
@@ -80,16 +80,49 @@
         app:layout_constraintTop_toBottomOf="@+id/tvPrice"
         app:layout_constraintStart_toEndOf="@id/tvStockDesc" />
 
+    <TextView
+        android:id="@+id/etNumberDesc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="@string/number"
+        android:textColor="@color/design_default_color_error"
+        app:layout_constraintTop_toBottomOf="@+id/tvPriceDesc"
+        app:layout_constraintStart_toEndOf="@id/ivImage"  />
+
+    <EditText
+        android:id="@+id/etNumber"
+        android:layout_width="60dp"
+        android:layout_height="35dp"
+        android:ems="10"
+        android:inputType="number"
+        app:layout_constraintTop_toBottomOf="@+id/tvPriceDesc"
+        app:layout_constraintStart_toEndOf="@id/etNumberDesc"/>
+
     <Button
         android:id="@+id/btnBuy"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@color/black"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
         android:onClick="buy"
         android:text="@string/buy"
         app:backgroundTint="@null"
-        app:layout_constraintTop_toBottomOf="@+id/tvPrice"
-        app:layout_constraintStart_toEndOf="@id/tvStockDesc" />
+        app:layout_constraintTop_toBottomOf="@+id/etNumber"
+        app:layout_constraintStart_toEndOf="@id/etNumber" />
+
+    <Button
+        android:id="@+id/btnMain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/black"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:onClick="goMain"
+        android:text="@string/main_activity"
+        app:backgroundTint="@null"
+        app:layout_constraintTop_toBottomOf="@+id/btnBuy"
+        app:layout_constraintStart_toEndOf="@id/etNumber" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

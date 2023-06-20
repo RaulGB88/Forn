@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -21,7 +22,9 @@ public class ProductDetailActivity extends AppCompatActivity {
     TextView tv2;
     TextView tv3;
     TextView tv4;
+    TextView et5;
     private Button btnBuy;
+    private Button btnMain;
 
     ProductDAO productDAO = new ProductDAO();
 
@@ -37,6 +40,7 @@ public class ProductDetailActivity extends AppCompatActivity {
         }
 
         btnBuy = (Button) findViewById(R.id.btnBuy);
+        btnMain = (Button) findViewById(R.id.btnMain);
 
         btnBuy.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,12 +49,28 @@ public class ProductDetailActivity extends AppCompatActivity {
                 buy(product);
             }
         });
+
+        btnMain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                goMain(product);
+            }
+        });
     }
 
     private void buy(Product item) {
         Toast.makeText(this, String.valueOf("Producto comprado...: " + item.getName() + " - " + item.getPrice()), Toast.LENGTH_SHORT).show();
-        item.setStock(item.getStock()-1);
+
+        et5 = (TextView) findViewById(R.id.etNumber);
+        int number = Integer.parseInt(et5.getText().toString());
+
+        item.setStock(item.getStock()-number);
         productDAO.update(item);
+
+        Intent intent = new Intent(ProductDetailActivity.this, ProductDetailActivity.class);
+        intent.putExtra("item", item);
+        startActivity(intent);
     }
 
     public void render(Product item) {
@@ -67,6 +87,12 @@ public class ProductDetailActivity extends AppCompatActivity {
         tv2.setText(String.valueOf(item.getName()));
         tv3.setText(String.valueOf(item.getStock()));
         tv4.setText(String.valueOf(item.getPrice()));
+    }
+
+    public void goMain(Product item) {
+        Intent intent = new Intent(ProductDetailActivity.this, MainActivity.class);
+        //intent.putExtra("item", item);
+        startActivity(intent);
     }
 
 }
