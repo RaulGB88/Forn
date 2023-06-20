@@ -6,6 +6,16 @@
     android:layout_height="wrap_content"
     tools:context=".ProductDetailActivity">
 
+    <ImageView
+        android:id="@+id/ivLogo"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="10dp"
+        android:src="@drawable/panaderia"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
     <TextView
         android:id="@+id/etUserDesc"
         android:layout_width="wrap_content"
@@ -14,6 +24,7 @@
         android:textSize="24sp"
         android:text="@string/user"
         android:textColor="@color/design_default_color_primary_variant"
+        app:layout_constraintTop_toBottomOf="@id/ivLogo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 

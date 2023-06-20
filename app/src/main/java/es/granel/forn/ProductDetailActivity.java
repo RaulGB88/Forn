@@ -61,7 +61,7 @@ public class ProductDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                buy(product);
+                buy(user, product);
             }
         });
 
@@ -74,11 +74,19 @@ public class ProductDetailActivity extends AppCompatActivity {
         });
     }
 
-    private void buy(Product item) {
+    private void buy(Client user, Product item) {
         Toast.makeText(this, String.valueOf("Producto comprado...: " + item.getName() + " - " + item.getPrice()), Toast.LENGTH_SHORT).show();
 
         et5 = (TextView) findViewById(R.id.etNumber);
-        int number = Integer.parseInt(et5.getText().toString());
+
+        int number = 0;
+
+        // If no number in EditText, only buy one.
+        try {
+            number = Integer.parseInt(et5.getText().toString());
+        } catch (Exception e){
+            number = 1;
+        }
 
         item.setStock(item.getStock()-number);
         productDAO.update(item);
