@@ -39,12 +39,12 @@ public class ProductDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                buy();
+                buy(product);
             }
         });
     }
 
-    private void buy() {
+    private void buy(Product item) {
         Toast.makeText(this, String.valueOf("Bougth product."), Toast.LENGTH_SHORT).show();
 
         ContentValues reg = new ContentValues();
