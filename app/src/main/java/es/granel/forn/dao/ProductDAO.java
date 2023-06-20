@@ -36,7 +36,7 @@ public class ProductDAO implements IPojoDAO {
         contentValues.put("nombre", c.getName());
         contentValues.put("precio", c.getPrice());
         contentValues.put("stock", c.getStock());
-        contentValues.put("idClient", c.getClient().getId());
+        //contentValues.put("idClient", c.getClient().getId());
 
         String condicion = "id=" + String.valueOf(c.getId());
 

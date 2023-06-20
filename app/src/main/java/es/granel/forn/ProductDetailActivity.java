@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import es.granel.forn.dao.ProductDAO;
 import es.granel.forn.model.Product;
 
 public class ProductDetailActivity extends AppCompatActivity {
@@ -21,6 +22,8 @@ public class ProductDetailActivity extends AppCompatActivity {
     TextView tv3;
     TextView tv4;
     private Button btnBuy;
+
+    ProductDAO productDAO = new ProductDAO();
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -45,11 +48,9 @@ public class ProductDetailActivity extends AppCompatActivity {
     }
 
     private void buy(Product item) {
-        Toast.makeText(this, String.valueOf("Bougth product."), Toast.LENGTH_SHORT).show();
-
-        ContentValues reg = new ContentValues();
-
-
+        Toast.makeText(this, String.valueOf("Producto comprado...: " + item.getName() + " - " + item.getPrice()), Toast.LENGTH_SHORT).show();
+        item.setStock(item.getStock()-1);
+        productDAO.update(item);
     }
 
     public void render(Product item) {
