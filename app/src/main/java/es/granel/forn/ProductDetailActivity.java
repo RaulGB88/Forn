@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import es.granel.forn.dao.ProductDAO;
+import es.granel.forn.model.Client;
 import es.granel.forn.model.Product;
 
 public class ProductDetailActivity extends AppCompatActivity {
@@ -26,6 +27,10 @@ public class ProductDetailActivity extends AppCompatActivity {
     private Button btnBuy;
     private Button btnMain;
 
+    public Client user;
+
+    TextView txtUser;
+
     ProductDAO productDAO = new ProductDAO();
 
     @SuppressLint("MissingInflatedId")
@@ -34,7 +39,17 @@ public class ProductDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_detail);
 
+        Client user = (Client) getIntent().getSerializableExtra("user");
         Product product = (Product) getIntent().getSerializableExtra("item");
+
+        // Clean
+        txtUser = (TextView) findViewById(R.id.etUser);
+        if(user == null) {
+            txtUser.append("");
+        } else {
+            txtUser.setText(user.getName());
+        }
+
         if(product != null) {
             render(product);
         }
@@ -54,7 +69,7 @@ public class ProductDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                goMain(product);
+                goMain(user);
             }
         });
     }
@@ -70,6 +85,7 @@ public class ProductDetailActivity extends AppCompatActivity {
 
         Intent intent = new Intent(ProductDetailActivity.this, ProductDetailActivity.class);
         intent.putExtra("item", item);
+        intent.putExtra("user", user);
         startActivity(intent);
     }
 
@@ -89,9 +105,9 @@ public class ProductDetailActivity extends AppCompatActivity {
         tv4.setText(String.valueOf(item.getPrice()));
     }
 
-    public void goMain(Product item) {
+    public void goMain(Client user) {
         Intent intent = new Intent(ProductDetailActivity.this, MainActivity.class);
-        //intent.putExtra("item", item);
+        intent.putExtra("user", user);
         startActivity(intent);
     }
 
