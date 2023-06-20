@@ -13,4 +13,6 @@
     <string name="price">Precio:</string>
     <string name="stock">Stock:</string>
     <string name="buy">Comprar</string>
+    <string name="number">Unidades</string>
+    <string name="main_activity">Menú Principal</string>
 </resources>

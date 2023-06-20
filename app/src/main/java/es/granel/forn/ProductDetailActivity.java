@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -11,6 +12,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import es.granel.forn.dao.ProductDAO;
+import es.granel.forn.model.Client;
 import es.granel.forn.model.Product;
 
 public class ProductDetailActivity extends AppCompatActivity {
@@ -20,7 +23,15 @@ public class ProductDetailActivity extends AppCompatActivity {
     TextView tv2;
     TextView tv3;
     TextView tv4;
+    TextView et5;
     private Button btnBuy;
+    private Button btnMain;
+
+    public Client user;
+
+    TextView txtUser;
+
+    ProductDAO productDAO = new ProductDAO();
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -28,28 +39,54 @@ public class ProductDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_detail);
 
+        Client user = (Client) getIntent().getSerializableExtra("user");
         Product product = (Product) getIntent().getSerializableExtra("item");
+
+        // Clean
+        txtUser = (TextView) findViewById(R.id.etUser);
+        if(user == null) {
+            txtUser.append("");
+        } else {
+            txtUser.setText(user.getName());
+        }
+
         if(product != null) {
             render(product);
         }
 
         btnBuy = (Button) findViewById(R.id.btnBuy);
+        btnMain = (Button) findViewById(R.id.btnMain);
 
         btnBuy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
             {
-                buy();
+                buy(product);
+            }
+        });
+
+        btnMain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                goMain(user);
             }
         });
     }
 
-    private void buy() {
-        Toast.makeText(this, String.valueOf("Bougth product."), Toast.LENGTH_SHORT).show();
+    private void buy(Product item) {
+        Toast.makeText(this, String.valueOf("Producto comprado...: " + item.getName() + " - " + item.getPrice()), Toast.LENGTH_SHORT).show();
 
-        ContentValues reg = new ContentValues();
+        et5 = (TextView) findViewById(R.id.etNumber);
+        int number = Integer.parseInt(et5.getText().toString());
 
+        item.setStock(item.getStock()-number);
+        productDAO.update(item);
 
+        Intent intent = new Intent(ProductDetailActivity.this, ProductDetailActivity.class);
+        intent.putExtra("item", item);
+        intent.putExtra("user", user);
+        startActivity(intent);
     }
 
     public void render(Product item) {
@@ -66,6 +103,12 @@ public class ProductDetailActivity extends AppCompatActivity {
         tv2.setText(String.valueOf(item.getName()));
         tv3.setText(String.valueOf(item.getStock()));
         tv4.setText(String.valueOf(item.getPrice()));
+    }
+
+    public void goMain(Client user) {
+        Intent intent = new Intent(ProductDetailActivity.this, MainActivity.class);
+        intent.putExtra("user", user);
+        startActivity(intent);
     }
 
 }

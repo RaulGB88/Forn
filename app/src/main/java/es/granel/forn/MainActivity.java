@@ -33,9 +33,9 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
 
     RecyclerView rvView;
 
-    Client clientLoged;
+    Client user;
 
-    TextView txtdatos;
+    TextView txtUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,14 +43,14 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
         setContentView(R.layout.activity_main);
 
         // Client loged (in session).
-        clientLoged = (Client) getIntent().getSerializableExtra("user");
+        user = (Client) getIntent().getSerializableExtra("user");
 
         // Clean
-        txtdatos = (TextView) findViewById(R.id.etUser);
-        if(clientLoged == null) {
-            txtdatos.append("");
+        txtUser = (TextView) findViewById(R.id.etUser);
+        if(user == null) {
+            txtUser.append("");
         } else {
-            txtdatos.setText(clientLoged.getName());
+            txtUser.setText(user.getName());
         }
 
         // Charge BD.
@@ -77,12 +77,14 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
 
     public void buy(View view){
         Intent intent;
-        if(clientLoged == null) {
+        if(user == null) {
             intent = new Intent(MainActivity.this, LoginActivity.class);
+            intent.putExtra("user", user);
             startActivity(intent);
         } else {
             // Stock -1 in DAO, and reload MainActiviy.
             intent = new Intent(MainActivity.this, MainActivity.class);
+            intent.putExtra("user", user);
             startActivity(intent);
         }
     }
@@ -115,6 +117,7 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
 
         Intent intent = new Intent(MainActivity.this, ProductDetailActivity.class);
         intent.putExtra("item", item);
+        intent.putExtra("user", user);
         startActivity(intent);
     }
 }
