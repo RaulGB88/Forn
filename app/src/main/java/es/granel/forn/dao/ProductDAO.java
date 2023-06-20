@@ -167,7 +167,7 @@ public class ProductDAO implements IPojoDAO {
             if(i == R.drawable.pepito_pan && itemEntry.getName().equalsIgnoreCase(Constants.PEPITO)) {
                 itemExit.setImage(i);
             }
-            if(i == R.drawable.pepito_pan && itemEntry.getName().equalsIgnoreCase(Constants.PAN_PUEBLO)) {
+            if(i == R.drawable.pan && itemEntry.getName().equalsIgnoreCase(Constants.PAN_PUEBLO)) {
                 itemExit.setImage(i);
             }
             if(i == R.drawable.pepito_pan && itemEntry.getName().equalsIgnoreCase(Constants.PAN_CLASICO)) {
